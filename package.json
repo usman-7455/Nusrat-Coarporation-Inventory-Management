@@ -1,0 +1,80 @@
+{
+  "name": "inventory_react_app",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/electron/main.js",
+  "homepage": "./",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm run dev\" \"wait-on tcp:5175 && electron .\"",
+    "build-electron": "npm run build && electron-builder",
+    "dist": "npm run build && electron-builder --publish=never"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "better-sqlite3": "^12.4.1",
+    "chart.js": "^4.5.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "react": "^19.1.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.3",
+    "concurrently": "^7.6.0",
+    "electron": "^38.1.2",
+    "electron-builder": "^24.13.3",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0",
+    "vite": "^7.1.7",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.inventory.app",
+    "productName": "Inventory Manager",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "src/electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "src/logo.png",
+        "to": "logo.png"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/logo.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "src/logo.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "src/logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
